@@ -5,13 +5,24 @@ import SignIn from './components/SignIn/SignIn'
 import CategoryList from './components/CategoryList/CategoryList.jsx'
 import { Route, Routes } from 'react-router-dom'
 import * as authService from './services/authService.js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+
+import * as categoryService from './services/categoryService.js'
 
 const App = () => {
 
   const initialState = authService.getUser()
 
   const [user, setUser] = useState(initialState)
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    const fetchAllCategories = async () => {
+      const categoriesData = await categoryService.index()
+      setCategories(categoriesData)
+    }
+    fetchAllCategories()
+  }, [])
 
   const handleSignUp = async (formData) => {
     try {
@@ -41,7 +52,7 @@ const App = () => {
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
           <Route path='/' element={<h1>Hello world!</h1>} />
-          <Route path='/categories' element={<CategoryList />}/>
+          <Route path='/categories' element={<CategoryList categories={categories}/>}/>
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />
