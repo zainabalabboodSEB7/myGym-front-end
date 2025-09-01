@@ -3,13 +3,16 @@ import NavBar from './components/NavBar/NavBar'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import CategoryList from './components/CategoryList/CategoryList.jsx'
-import { Route, Routes } from 'react-router-dom'
+import CategoryDetails from './components/CategoryDetails/CategoryDetails.jsx'
+import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
 
 import * as categoryService from './services/categoryService.js'
 
 const App = () => {
+
+  const navigate = useNavigate()
 
   const initialState = authService.getUser()
 
@@ -47,12 +50,24 @@ const App = () => {
     setUser(res)
   }
 
+ const handleDeleteCategory = async (categoryId) => {
+  try {
+    await categoryService.deleteCategory(categoryId)
+    setCategories(prev => prev.filter(category => category.id !== Number(categoryId)))
+    navigate('/categories')
+  } catch(err) {
+    console.error('Error deleting category:', err)
+  }
+}
+
+
   return (
     <>
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
           <Route path='/' element={<h1>Hello world!</h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
+          <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />
