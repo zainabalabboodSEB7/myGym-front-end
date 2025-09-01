@@ -14,12 +14,11 @@ const index = async (categoryId) => {
 
 const show = async (categoryId, sessionId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${categoryId}/sessions/${sessionId}`)
-    if (!res.ok) throw new Error('Failed to fetch session')
+    const res = await fetch(`${BASE_URL}/categories/${categoryId}/sessions/${sessionId}`)
     const data = await res.json()
     return data
   } catch (err) {
-    console.log(err)
+    console.error('Failed to fetch session', err)
   }
 }
 
@@ -83,6 +82,7 @@ const deleteSession = async (categoryId, sessionId) => {
     console.log(err)
   }
 }
+
 
 export {
   index,

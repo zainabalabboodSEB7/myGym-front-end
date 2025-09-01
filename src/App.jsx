@@ -8,8 +8,11 @@ import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
 import SessionList from './components/SessionList/SessionList.jsx'
+import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
+
 
 import * as categoryService from './services/categoryService.js'
+
 
 const App = () => {
 
@@ -61,6 +64,17 @@ const App = () => {
   }
 }
 
+  const handleDeleteSession = async (categoryId, sessionId) => {
+    try {
+      await sessionService.deleteSession(categoryId, sessionId)
+      // Remove deleted session from sessions state
+      setSessions(prev => prev.filter(session => session._id !== sessionId))
+      navigate(`/categories/${categoryId}/sessions`)
+    } catch (err) {
+      console.error('Error deleting session:', err)
+    }
+  }
+
 
   return (
     <>
@@ -70,6 +84,9 @@ const App = () => {
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
           <Route path="/categories/:categoryId/sessions" element={<SessionList />} />
+          {/* <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} handleDeleteSession={handleDeleteSession} />} /> */}
+          <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} />} />
+
 
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />

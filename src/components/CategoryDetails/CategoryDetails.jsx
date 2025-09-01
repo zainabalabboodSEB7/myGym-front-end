@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import * as categoryService from '../../services/categoryService.js'
-
+import SessionList from '../SessionList/SessionList.jsx';
 const CategoryDetails = ({ user, handleDeleteCategory }) => {
     const { categoryId } = useParams()
     const [category, setCategory] = useState(null)
@@ -23,7 +23,9 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
 
         {user && user.is_admin && (
             <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
-        )}
+        )}   
+         <SessionList user={user} /> 
+
         </>
     )
 }
