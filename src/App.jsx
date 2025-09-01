@@ -7,9 +7,14 @@ import CategoryDetails from './components/CategoryDetails/CategoryDetails.jsx'
 import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
+import SessionList from './components/SessionList/SessionList.jsx'
+import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
+
+import * as sessionService from './services/sessionService.js'
 
 import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
+
 
 const App = () => {
 
@@ -19,6 +24,7 @@ const App = () => {
 
   const [user, setUser] = useState(initialState)
   const [categories, setCategories] = useState([])
+  const [sessions, setSessions] = useState([])
 
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -88,6 +94,17 @@ const App = () => {
   }
 }
 
+  const handleDeleteSession = async (categoryId, sessionId) => {
+    try {
+      await sessionService.deleteSession(categoryId, sessionId)
+      // Remove deleted session from sessions state
+      setSessions(prev => prev.filter(session => session._id !== sessionId))
+      navigate(`/categories/${categoryId}/sessions`)
+    } catch (err) {
+      console.error('Error deleting session:', err)
+    }
+  }
+
 
   return (
     <>
@@ -100,6 +117,11 @@ const App = () => {
           <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} user={user}  />} />
 
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
+          <Route path="/categories/:categoryId/sessions" element={<SessionList />} />
+          <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} handleDeleteSession={handleDeleteSession} />} />
+          {/* <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user}/>} /> */}
+
+
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />
