@@ -11,6 +11,9 @@ import { useState, useEffect } from 'react'
 import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
 
+// import SessionForm from './components/SessionsForm/SessionForm.jsx'
+
+
 const App = () => {
 
   const navigate = useNavigate()
@@ -63,7 +66,6 @@ const App = () => {
 
 }
 
-
  const handleUpdateCategory  = async (formData, categoryId)=>{
    try{
     const updatedCategory = await categoryService.update(formData, categoryId)
@@ -74,7 +76,6 @@ const App = () => {
     navigate('/categories')
     } catch (err){
       console.error('Error adding category:', err)
-
     }
 
 }
@@ -89,6 +90,29 @@ const App = () => {
   }
 }
 
+const handleAddSession = async (formData) => {
+  try {
+    const newSession = await sessionService.create(formData);
+    setSessions([...sessions, newSession]); 
+    navigate('/sessions');
+  } catch (err) {
+    console.error('Error adding session:', err);
+  }
+};
+
+const handleUpdateSession = async (formData, sessionId) => {
+  try {
+    const updatedSession = await sessionService.update(formData, sessionId);
+    const sessionIndex = sessions.findIndex(session => session.id === sessionId); 
+    const newSessions = [...sessions];
+    newSessions[sessionIndex] = updatedSession;
+    setSessions(newSessions);
+    navigate('/sessions/:sessionId'); 
+  } catch (err) {
+    console.error('Error updating session:', err);
+  }
+};
+
 
   return (
     <>
@@ -101,6 +125,10 @@ const App = () => {
           <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} user={user}  />} />
 
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
+{/* 
+           <Route path='/sessions/new' element={<SessionForm handleAddSession={handleAddSession} user={user}  />} />
+          <Route path='/sessions/:sessionId/edit' element={<SessionForm handleUpdateSession={handleUpdateSession} user={user}  />} /> */}
+
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />
