@@ -64,19 +64,18 @@ const App = () => {
 }
 
 
- const handleUpdateCategory  = async (formData, categoryId)=>{
+  const handleUpdateCategory  = async (formData, categoryId)=>{
    try{
     const updatedCategory = await categoryService.update(formData, categoryId)
     const categoryIndex = categories.findIndex(category => category._id === categoryId)
     const newCategories = [...categories]
     newCategories[categoryIndex] = updatedCategory
     setCategories(newCategories)
-    navigate('/categories')
+    navigate(`/categories/${categoryId}`)
     } catch (err){
-      console.error('Error adding category:', err)
+      console.error('Error editing category:', err)
 
     }
-
 }
 
  const handleDeleteCategory = async (categoryId) => {
