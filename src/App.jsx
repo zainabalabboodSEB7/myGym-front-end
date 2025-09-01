@@ -10,6 +10,7 @@ import { useState, useEffect } from 'react'
 import SessionList from './components/SessionList/SessionList.jsx'
 import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
 
+import * as sessionService from './services/sessionService.js'
 
 import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
@@ -23,6 +24,7 @@ const App = () => {
 
   const [user, setUser] = useState(initialState)
   const [categories, setCategories] = useState([])
+  const [sessions, setSessions] = useState([])
 
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -116,8 +118,8 @@ const App = () => {
 
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
           <Route path="/categories/:categoryId/sessions" element={<SessionList />} />
-          {/* <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} handleDeleteSession={handleDeleteSession} />} /> */}
-          <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} />} />
+          <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} handleDeleteSession={handleDeleteSession} />} />
+          {/* <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user}/>} /> */}
 
 
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
