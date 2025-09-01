@@ -66,18 +66,17 @@ const App = () => {
 
 }
 
- const handleUpdateCategory  = async (formData, categoryId)=>{
+  const handleUpdateCategory  = async (formData, categoryId)=>{
    try{
     const updatedCategory = await categoryService.update(formData, categoryId)
     const categoryIndex = categories.findIndex(category => category._id === categoryId)
     const newCategories = [...categories]
     newCategories[categoryIndex] = updatedCategory
     setCategories(newCategories)
-    navigate('/categories')
+    navigate(`/categories/${categoryId}`)
     } catch (err){
-      console.error('Error adding category:', err)
+      console.error('Error editing category:', err)
     }
-
 }
 
  const handleDeleteCategory = async (categoryId) => {
@@ -94,9 +93,9 @@ const handleAddSession = async (formData) => {
   try {
     const newSession = await sessionService.create(formData);
     setSessions([...sessions, newSession]); 
-    navigate('/sessions');
+    navigate('/categories/:categoryId/sessions/categoryId');
   } catch (err) {
-    console.error('Error adding session:', err);
+    console.error('Error updating session:', err);
   }
 };
 
@@ -107,12 +106,11 @@ const handleUpdateSession = async (formData, sessionId) => {
     const newSessions = [...sessions];
     newSessions[sessionIndex] = updatedSession;
     setSessions(newSessions);
-    navigate('/sessions/:sessionId'); 
+    navigate('/categories/:categoryId/sessions/'); 
   } catch (err) {
     console.error('Error updating session:', err);
   }
 };
-
 
   return (
     <>
@@ -126,8 +124,8 @@ const handleUpdateSession = async (formData, sessionId) => {
 
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
 {/* 
-           <Route path='/sessions/new' element={<SessionForm handleAddSession={handleAddSession} user={user}  />} />
-          <Route path='/sessions/:sessionId/edit' element={<SessionForm handleUpdateSession={handleUpdateSession} user={user}  />} /> */}
+           <Route path='/categories/:categoryId/sessions/new' element={<SessionForm handleAddSession={handleAddSession} user={user}  />} />
+          <Route path='/categories/:categoryId'/sessions/:sessionId/edit' element={<SessionForm handleUpdateSession={handleUpdateSession} user={user}  />} /> */}
 
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />

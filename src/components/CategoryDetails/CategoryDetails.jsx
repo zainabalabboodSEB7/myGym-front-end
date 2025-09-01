@@ -23,7 +23,10 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
         <strong>Description:</strong> {category.description}
 
         {user && user.is_admin && (
+          <div>
+            <Link to={`/categories/${categoryId}/edit`}>Edit</Link>
             <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
+          </div>
         )}
         </>
     )
