@@ -9,12 +9,13 @@ import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
 import SessionList from './components/SessionList/SessionList.jsx'
 import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
+import SessionForm from './components/SessionsForm/SessionForm.jsx'
+
 
 import * as sessionService from './services/sessionService.js'
 
 import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
-
 
 const App = () => {
 
@@ -69,7 +70,6 @@ const App = () => {
 
 }
 
-
   const handleUpdateCategory  = async (formData, categoryId)=>{
    try{
     const updatedCategory = await categoryService.update(formData, categoryId)
@@ -80,7 +80,6 @@ const App = () => {
     navigate(`/categories/${categoryId}`)
     } catch (err){
       console.error('Error editing category:', err)
-
     }
 }
 
@@ -105,6 +104,30 @@ const App = () => {
     }
   }
 
+const handleAddSession = async (categoryId, formData) => {
+  try {
+    const newSession = await sessionService.create(categoryId, formData);
+    setSessions([...sessions, newSession]); 
+    navigate(`/categories/${categoryId}/sessions`);
+  } catch (err) {
+    console.error('Error adding session:', err);
+  }
+};
+
+const handleUpdateSession = async (categoryId, sessionId, payload) => {
+  try {
+    const updatedSession = await sessionService.update(categoryId, sessionId, payload)
+
+    const sessionIndex = sessions.findIndex(s => s.id === sessionId);
+    const newSessions = [...sessions];
+    newSessions[sessionIndex] = updatedSession;
+    setSessions(newSessions);
+    navigate(`/categories/${categoryId}/sessions/${sessionId}`);
+  } catch (err) {
+    console.error('Error updating session:', err);
+  }
+};
+
 
   return (
     <>
@@ -117,10 +140,11 @@ const App = () => {
           <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} user={user}  />} />
 
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
-          <Route path="/categories/:categoryId/sessions" element={<SessionList />} />
+          <Route path="/categories/:categoryId/sessions" element={<SessionList user={user}  />} />
           <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} handleDeleteSession={handleDeleteSession} />} />
-          {/* <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user}/>} /> */}
 
+          <Route path="/categories/:categoryId/sessions/new" element={<SessionForm user={user} categories={categories} handleAddSession={handleAddSession} />} />
+          <Route path="/categories/:categoryId/sessions/:sessionId/edit" element={<SessionForm user={user} categories={categories} handleUpdateSession={handleUpdateSession} />} />
 
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
