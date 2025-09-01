@@ -7,6 +7,7 @@ import CategoryDetails from './components/CategoryDetails/CategoryDetails.jsx'
 import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
+import SessionList from './components/SessionList/SessionList.jsx'
 
 import * as categoryService from './services/categoryService.js'
 
@@ -68,6 +69,8 @@ const App = () => {
           <Route path='/' element={<h1>Hello world!</h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
+          <Route path="/categories/:categoryId/sessions" element={<SessionList />} />
+
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />
