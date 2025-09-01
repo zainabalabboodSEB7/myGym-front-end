@@ -7,7 +7,6 @@ import CategoryDetails from './components/CategoryDetails/CategoryDetails.jsx'
 import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
-import HomePage from './components/HomePage/HomePage.jsx'
 
 import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
@@ -94,7 +93,7 @@ const App = () => {
     <>
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
-          <Route path='/' element={<HomePage HomePage={HomePage}/>} />
+          <Route path='/' element={<h1>Hello, world! </h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
 
           <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} user={user}  />} />
