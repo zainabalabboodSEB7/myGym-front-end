@@ -110,7 +110,7 @@ const App = () => {
     <>
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
-          <Route path='/' element={<h1>Hello world!</h1>} />
+          <Route path='/' element={<h1>Hello, world! </h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
 
           <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} user={user}  />} />
