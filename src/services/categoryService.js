@@ -24,13 +24,18 @@ const create = async (formData) => {
   try {
     const token = localStorage.getItem('token')
 
+    const payload = {
+      ...formData,
+      instructor_id: Number(formData.instructor_id) // convert to number
+    };
+
     const res = await fetch(BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(payload)
     })
 
     if (!res.ok) {
@@ -49,13 +54,19 @@ const create = async (formData) => {
 const update = async (formData, categoryId) => {
   try {
     const token = localStorage.getItem('token')
+    
+    const payload = {
+      ...formData,
+      instructor_id: Number(formData.instructor_id) 
+    };
+    
     const res = await fetch(`${BASE_URL}/${categoryId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify(formData)
+      body: JSON.stringify(payload)
     })
 
     if (!res.ok) {

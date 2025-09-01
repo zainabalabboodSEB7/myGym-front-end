@@ -20,7 +20,9 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
     return (
         <>
         <strong>Category:</strong> {category.name}<br />
-        <strong>Description:</strong> {category.description}
+        <strong>Description:</strong> {category.description}<br />
+        <strong>Instructor:</strong> {category.instructor?.name || "No instructor"}
+
 
         {user && user.is_admin && (
           <div>
