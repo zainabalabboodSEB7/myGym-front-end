@@ -4,6 +4,7 @@ import * as categoryService from '../../services/categoryService.js'
 
 const CategoryDetails = ({ user, handleDeleteCategory }) => {
     const { categoryId } = useParams()
+    
     const [category, setCategory] = useState(null)
 
     useEffect(() => {
