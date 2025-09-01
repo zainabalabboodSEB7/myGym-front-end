@@ -67,9 +67,19 @@ const SessionList = ({ user }) => {
   const [sessions, setSessions] = useState([])
   const navigate = useNavigate()
 
-  useEffect(() => {
-    sessionService.index(categoryId).then(data => setSessions(data || []))
-  }, [categoryId])
+ useEffect(() => {
+  if (!categoryId) return; 
+  const fetchSessions = async () => {
+    try {
+      const data = await sessionService.index(categoryId);
+      setSessions(data || []);
+    } catch (err) {
+      console.error('Failed to fetch sessions', err);
+    }
+  };
+  fetchSessions();
+}, [categoryId]);
+
 
   return (
     <main className="session-list-container">

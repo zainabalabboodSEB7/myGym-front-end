@@ -22,7 +22,7 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
 
     return (
         <main>
-            <h1>its working</h1>
+            {/* <h1>its working</h1> */}
             <h1>{session.name}</h1>
             <p><strong>Description:</strong> {session.description}</p>
             <p><strong>Duration:</strong> {session.duration_minutes} minutes</p>

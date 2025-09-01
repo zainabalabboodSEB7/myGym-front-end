@@ -19,6 +19,7 @@ const NavBar = (props) => {
 
            {props.user.is_admin && (
             <li><Link to="/categories/new">Add Category</Link></li>
+            
         )}
 
           <li><Link to='/' onClick={props.handleSignOut}>Sign Out</Link></li>
