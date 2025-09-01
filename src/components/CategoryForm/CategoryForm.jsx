@@ -1,44 +1,61 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import * as  categoryService from '../../services/categoryService';
+import * as categoryService from '../../services/categoryService';
 import { Form, Button, Container, Card } from 'react-bootstrap';
 
-const CategoryForm = (props) => {
+const CategoryForm = ({ handleAddCategory, handleUpdateCategory }) => {
+  const { categoryId } = useParams();
 
-  const {categoryId} = useParams()
-  const  initialState = {
-    name:'',
-    description:'',
-    session:'',
-  }
-  const [formData, setFormData] = useState(initialState)
+  const initialState = {
+    name: '',
+    description: '',
+    session: '',
+  };
+  const [formData, setFormData] = useState(initialState);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(()=>{
-    const fetchcategory = async()=>{
-      const data = await categoryService.show(categoryId)
-      setFormData(data)
-    }
-    if(categoryId) fetchcategory()
-  },[categoryId])
+  useEffect(() => {
+    const fetchCategory = async () => {
+      try {
+        setLoading(true);
+        const data = await categoryService.show(categoryId);
+        if (data) setFormData(data);
+      } catch (err) {
+        console.error("Failed to fetch category", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (categoryId) fetchCategory();
+  }, [categoryId]);
 
   const handleChange = (evt) => {
-		setFormData({ ...formData, [evt.target.name]: evt.target.value })
-	}
+    setFormData({ ...formData, [evt.target.name]: evt.target.value });
+  };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if (categoryId) {
-      props.handleUpdateCategory(formData, categoryId);
-    } else {
-      props.handleAddCategory(formData);
+    try {
+      if (categoryId) {
+        await handleUpdateCategory(formData, categoryId);
+      } else {
+        await handleAddCategory(formData);
+      }
+    } catch (err) {
+      console.error("Failed to save category", err);
     }
   };
+
+  if (loading) return <p>Loading...</p>;
 
   return (
     <Container className="d-flex justify-content-center align-items-center min-vh-100">
       <Card bg="dark" text="light" style={{ width: '28rem' }}>
         <Card.Body>
-          <Card.Title className="mb-4 text-center">{categoryId ? 'Edit Category' : 'New Category'}</Card.Title>
+          <Card.Title className="mb-4 text-center">
+            {categoryId ? 'Edit Category' : 'New Category'}
+          </Card.Title>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formName">
               <Form.Label>Category:</Form.Label>
@@ -78,6 +95,6 @@ const CategoryForm = (props) => {
       </Card>
     </Container>
   );
-}
+};
 
 export default CategoryForm;

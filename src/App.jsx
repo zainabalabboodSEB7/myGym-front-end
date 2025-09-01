@@ -51,15 +51,17 @@ const App = () => {
  const handleAddCategory = async (formData)=>{
     const newCategory = await categoryService.create(formData)
     setCategories([...categories, newCategory])
-  }
+}
 
-  const handleUpdateCategory  = async (formData, categoryId)=>{
+
+ const handleUpdateCategory  = async (formData, categoryId)=>{
     const updatedCategory = await categoryService.update(formData, categoryId)
     const categoryIndex = categories.findIndex(category => category._id === categoryId)
     const newCategories = [...categories]
     newCategories[categoryIndex] = updatedCategory
     setCategories(newCategories)
-  }
+}
+
   return (
     <>
       <NavBar user={user} handleSignOut={handleSignOut} />
@@ -67,8 +69,8 @@ const App = () => {
           <Route path='/' element={<h1>Hello world!</h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
 
-            <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} />} />
-            <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} />} />
+          <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} />} />
+          <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} />} />
 
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
