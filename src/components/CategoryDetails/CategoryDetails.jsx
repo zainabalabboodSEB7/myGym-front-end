@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import * as categoryService from '../../services/categoryService.js'
 import SessionList from '../SessionList/SessionList.jsx';
+import '../../App.css'
 const CategoryDetails = ({ user, handleDeleteCategory }) => {
     const { categoryId } = useParams()
     
