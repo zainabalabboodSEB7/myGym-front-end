@@ -1,14 +1,19 @@
 import { Link } from 'react-router-dom'
+import logo from '../../assets/images/logoname.png';
 
 const NavBar = (props) => {
-
-
-
   return (
-    <nav>
+    <nav id="navbar">
+      <div id="imageHome">
+         <img 
+         src={logo} 
+         alt="My Gym Logo" 
+         style={{ height: '50px', width: 'auto' }} 
+        />
+      </div>
       {props.user ? (
-        <ul>
-          <li>Welcome {props.user.username}</li>
+        <ul id='navbar-links'>
+          <li>Welcome, {props.user.username}</li>
           <li><Link to="/"> Home </Link></li>
           <li><Link to="/categories">Categories</Link></li>
 
@@ -27,6 +32,7 @@ const NavBar = (props) => {
         </ul>
       )}
     </nav>
+    
   )
 }
 

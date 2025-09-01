@@ -7,12 +7,13 @@ import CategoryDetails from './components/CategoryDetails/CategoryDetails.jsx'
 import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
+import SessionList from './components/SessionList/SessionList.jsx'
+import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
+
+import * as sessionService from './services/sessionService.js'
 
 import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
-
-// import SessionForm from './components/SessionsForm/SessionForm.jsx'
-
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
 
   const [user, setUser] = useState(initialState)
   const [categories, setCategories] = useState([])
+  const [sessions, setSessions] = useState([])
 
   useEffect(() => {
     const fetchAllCategories = async () => {
@@ -89,6 +91,17 @@ const App = () => {
   }
 }
 
+  const handleDeleteSession = async (categoryId, sessionId) => {
+    try {
+      await sessionService.deleteSession(categoryId, sessionId)
+      // Remove deleted session from sessions state
+      setSessions(prev => prev.filter(session => session._id !== sessionId))
+      navigate(`/categories/${categoryId}/sessions`)
+    } catch (err) {
+      console.error('Error deleting session:', err)
+    }
+  }
+
 const handleAddSession = async (formData) => {
   try {
     const newSession = await sessionService.create(formData);
@@ -116,17 +129,13 @@ const handleUpdateSession = async (formData, sessionId) => {
     <>
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
-          <Route path='/' element={<h1>Hello world!</h1>} />
+          <Route path='/' element={<h1>Hello, world! </h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
 
           <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} user={user}  />} />
           <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} user={user}  />} />
 
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
-{/* 
-           <Route path='/categories/:categoryId/sessions/new' element={<SessionForm handleAddSession={handleAddSession} user={user}  />} />
-          <Route path='/categories/:categoryId'/sessions/:sessionId/edit' element={<SessionForm handleUpdateSession={handleUpdateSession} user={user}  />} /> */}
-
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />

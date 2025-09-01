@@ -85,10 +85,25 @@ const deleteCategory = async (categoryId) => {
   }
 }
 
+// const indexByAdmin = async () => {
+//   try {
+//     const token = localStorage.getSession('token');
+//     const res = await fetch(`${BASE_URL}/mine`, {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     });
+//     const data = await res.json();
+//     return data;
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
 export{
     index,
     show,
     create,
     update,
     deleteCategory,
+    // indexByAdmin,
 }

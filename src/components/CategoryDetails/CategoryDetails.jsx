@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import * as categoryService from '../../services/categoryService.js'
-
+import SessionList from '../SessionList/SessionList.jsx';
 const CategoryDetails = ({ user, handleDeleteCategory }) => {
     const { categoryId } = useParams()
     
@@ -16,7 +16,7 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
   }, [categoryId])
 
     if (!category) return <h2>Loading...</h2>;
-
+ 
     return (
         <>
         <strong>Category:</strong> {category.name}<br />
@@ -26,10 +26,15 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
           <div>
             <Link to={`/categories/${categoryId}/edit`}>Edit</Link>
             <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
-          </div>
-        )}
+ </div>
+        )}   
+         <SessionList user={user} /> 
+
+
+         
+   
         </>
     )
-}
+  }
 
 export default CategoryDetails;

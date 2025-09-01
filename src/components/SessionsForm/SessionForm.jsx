@@ -15,7 +15,7 @@ const SessionForm = ({ user, categories, handleAddSession, handleUpdateSession }
     description: '',
     duration_minutes: '',
     capacity: '',
-    category_id: categories.length ? categories[0].id : '', // default to first category
+    category_id: categories.length ? categories[0].id : '', 
     start_time: '',
     end_time: '',
   };
