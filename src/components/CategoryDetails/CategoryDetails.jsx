@@ -4,6 +4,7 @@ import * as categoryService from '../../services/categoryService.js'
 import SessionList from '../SessionList/SessionList.jsx';
 const CategoryDetails = ({ user, handleDeleteCategory }) => {
     const { categoryId } = useParams()
+    
     const [category, setCategory] = useState(null)
 
     useEffect(() => {
@@ -15,19 +16,25 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
   }, [categoryId])
 
     if (!category) return <h2>Loading...</h2>;
-
+ 
     return (
         <>
         <strong>Category:</strong> {category.name}<br />
         <strong>Description:</strong> {category.description}
 
         {user && user.is_admin && (
+          <div>
+            <Link to={`/categories/${categoryId}/edit`}>Edit</Link>
             <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
+ </div>
         )}   
          <SessionList user={user} /> 
 
+
+         
+   
         </>
     )
-}
+  }
 
 export default CategoryDetails;

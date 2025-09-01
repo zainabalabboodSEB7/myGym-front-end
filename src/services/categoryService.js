@@ -33,6 +33,10 @@ const create = async (formData) => {
       body: JSON.stringify(formData)
     })
 
+    if (!res.ok) {
+      throw new Error(`Error creating category: ${res.status}`);
+    }
+
     const data = await res.json()
     return data
 
@@ -40,6 +44,7 @@ const create = async (formData) => {
     console.log(err)
   }
 }
+
 
 const update = async (formData, categoryId) => {
   try {
@@ -52,6 +57,11 @@ const update = async (formData, categoryId) => {
       },
       body: JSON.stringify(formData)
     })
+
+    if (!res.ok) {
+      throw new Error(`Error updating category: ${res.status}`);
+    }
+
     const data = await res.json()
     return data
   } catch(err) {

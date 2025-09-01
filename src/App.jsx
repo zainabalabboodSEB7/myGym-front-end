@@ -12,6 +12,7 @@ import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
 
 
 import * as categoryService from './services/categoryService.js'
+import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
 
 
 const App = () => {
@@ -54,6 +55,33 @@ const App = () => {
     setUser(res)
   }
 
+ const handleAddCategory = async (formData)=>{
+    try{
+      const newCategory = await categoryService.create(formData)
+    setCategories([...categories, newCategory])
+    navigate('/categories')
+    } catch (err){
+      console.error('Error adding category:', err)
+
+    }
+
+}
+
+
+  const handleUpdateCategory  = async (formData, categoryId)=>{
+   try{
+    const updatedCategory = await categoryService.update(formData, categoryId)
+    const categoryIndex = categories.findIndex(category => category._id === categoryId)
+    const newCategories = [...categories]
+    newCategories[categoryIndex] = updatedCategory
+    setCategories(newCategories)
+    navigate(`/categories/${categoryId}`)
+    } catch (err){
+      console.error('Error editing category:', err)
+
+    }
+}
+
  const handleDeleteCategory = async (categoryId) => {
   try {
     await categoryService.deleteCategory(categoryId)
@@ -82,6 +110,10 @@ const App = () => {
       <Routes>
           <Route path='/' element={<h1>Hello world!</h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
+
+          <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} user={user}  />} />
+          <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} user={user}  />} />
+
           <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
           <Route path="/categories/:categoryId/sessions" element={<SessionList />} />
           {/* <Route path="/categories/:categoryId/sessions/:sessionId" element={<SessionDetails user={user} handleDeleteSession={handleDeleteSession} />} /> */}
