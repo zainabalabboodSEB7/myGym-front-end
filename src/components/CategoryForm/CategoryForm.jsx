@@ -3,13 +3,16 @@ import { useParams } from 'react-router-dom';
 import * as categoryService from '../../services/categoryService';
 import { Form, Button, Container, Card } from 'react-bootstrap';
 
-const CategoryForm = ({ handleAddCategory, handleUpdateCategory }) => {
+const CategoryForm = ({ user, handleAddCategory, handleUpdateCategory }) => {
   const { categoryId } = useParams();
+
+  if (!user || !user.is_admin) {
+    return <p className="text-center mt-5">You do not have permission to access this form.</p>;
+  }
 
   const initialState = {
     name: '',
     description: '',
-    session: '',
   };
   const [formData, setFormData] = useState(initialState);
   const [loading, setLoading] = useState(false);
@@ -73,16 +76,6 @@ const CategoryForm = ({ handleAddCategory, handleUpdateCategory }) => {
                 type="text"
                 name="description"
                 value={formData.description}
-                onChange={handleChange}
-                required
-              />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formSession">
-              <Form.Label>Sessions:</Form.Label>
-              <Form.Control
-                type="text"
-                name="session"
-                value={formData.session}
                 onChange={handleChange}
                 required
               />

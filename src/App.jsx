@@ -3,7 +3,8 @@ import NavBar from './components/NavBar/NavBar'
 import SignUp from './components/SignUp/SignUp'
 import SignIn from './components/SignIn/SignIn'
 import CategoryList from './components/CategoryList/CategoryList.jsx'
-import { Route, Routes } from 'react-router-dom'
+import CategoryDetails from './components/CategoryDetails/CategoryDetails.jsx'
+import { useNavigate, Route, Routes, Navigate } from 'react-router-dom'
 import * as authService from './services/authService.js'
 import { useState, useEffect } from 'react'
 
@@ -11,6 +12,8 @@ import * as categoryService from './services/categoryService.js'
 import CategoryForm from './components/CategoryForm/CategoryForm.jsx'
 
 const App = () => {
+
+  const navigate = useNavigate()
 
   const initialState = authService.getUser()
 
@@ -49,18 +52,43 @@ const App = () => {
   }
 
  const handleAddCategory = async (formData)=>{
-    const newCategory = await categoryService.create(formData)
+    try{
+      const newCategory = await categoryService.create(formData)
     setCategories([...categories, newCategory])
+    navigate('/categories')
+    } catch (err){
+      console.error('Error adding category:', err)
+
+    }
+
 }
 
 
  const handleUpdateCategory  = async (formData, categoryId)=>{
+   try{
     const updatedCategory = await categoryService.update(formData, categoryId)
     const categoryIndex = categories.findIndex(category => category._id === categoryId)
     const newCategories = [...categories]
     newCategories[categoryIndex] = updatedCategory
     setCategories(newCategories)
+    navigate('/categories')
+    } catch (err){
+      console.error('Error adding category:', err)
+
+    }
+
 }
+
+ const handleDeleteCategory = async (categoryId) => {
+  try {
+    await categoryService.deleteCategory(categoryId)
+    setCategories(prev => prev.filter(category => category.id !== Number(categoryId)))
+    navigate('/categories')
+  } catch(err) {
+    console.error('Error deleting category:', err)
+  }
+}
+
 
   return (
     <>
@@ -69,9 +97,10 @@ const App = () => {
           <Route path='/' element={<h1>Hello world!</h1>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
 
-          <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} />} />
-          <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} />} />
+          <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} user={user}  />} />
+          <Route path='/categories/:categoryId/edit' element={<CategoryForm handleUpdateCategory={handleUpdateCategory} user={user}  />} />
 
+          <Route path='/categories/:categoryId' element={<CategoryDetails user={user} handleDeleteCategory={handleDeleteCategory}/>}/>
           <Route path='/sign-up' element={<SignUp handleSignUp={handleSignUp} user={user} />} />
           <Route path='/sign-in' element={<SignIn handleSignIn={handleSignIn} user={user} />} />
           <Route path='*' element={<h1>404</h1>} />
