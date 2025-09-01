@@ -6,6 +6,7 @@ const SignUp = (props) => {
 
   const initialState = {
     username: '',
+    email: '', 
     password: '',
     passwordConf: '',
   }
@@ -40,7 +41,7 @@ const SignUp = (props) => {
 
   let formIsInvalid = true
 
-  if (formData.username && formData.password && formData.password === formData.passwordConf) {
+  if (formData.username && formData.email && formData.password && formData.password === formData.passwordConf) {
     formIsInvalid = false
   }
 
@@ -52,6 +53,9 @@ const SignUp = (props) => {
       <form onSubmit={handleSubmit}>
         <label>Username:</label>
         <input type="text" name='username' onChange={handleChange} />
+        <br />
+        <label>Email:</label> 
+        <input type="email" name="email" onChange={handleChange} />
         <br />
         <label>Password:</label>
         <input type="password" name='password' onChange={handleChange} />
