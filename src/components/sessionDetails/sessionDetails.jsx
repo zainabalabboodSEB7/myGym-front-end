@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import * as categoryService from '../../services/categoryService'
 import * as SessionService from '../../services/sessionService'
 import { useParams, useNavigate, Link } from "react-router-dom"
+import CommentForm from "../CommentForm/CommentForm"
 
 const SessionDetails = ({ user, handleDeleteSession }) => {
     const { categoryId, sessionId } = useParams()
@@ -88,7 +89,7 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
                 {[1, 2, 3, 4, 5].map((face) => (
                     <button
                         key={face}
-                        onClick={() => handleRateGame(face)}
+                        onClick={() => setUserRating(face)}
                         style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                     >
                         <svg
@@ -135,6 +136,41 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
                 {renderFaces()}
             </section>
         </div>
+
+         <div className="box">
+            <section>
+                <h2>Comments</h2>
+                {(!session.comments || session.comments.length === 0) && <p>No comments.</p>}
+                {session.comments && session.comments.map((comment) => (
+                    editingCommentId === comment._id ? (
+                        <CommentForm
+                            key={comment._id}
+                            initialText={editingText}
+                            handleAddComment={handleUpdateComment}
+                            submitLabel="Update"
+                            handleCancel={() => setEditingCommentId(null)}
+                        />
+                    ) : (
+                        <div key={comment._id}>
+                            <p>
+                                <b>{comment.author?.username || 'Unknown Author'}</b>: {comment.comment}
+                            </p>
+                            {user && comment.author?._id === user._id && (
+                                <>
+                                    <button onClick={() => handleEditComment(comment)}>Edit</button>
+                                    <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
+                                </>
+                            )}
+                        </div>
+                    )
+                ))}
+                {user && !editingCommentId && (
+                    <CommentForm handleAddComment={handleAddComment} submitLabel="Add Comment" />
+                )}
+            </section>
+        </div>
+
+        
         </>
     )
 }
