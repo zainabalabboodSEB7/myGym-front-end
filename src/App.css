@@ -244,13 +244,7 @@ HomePage.css
 
 /* --------------------session --------------------------------------------------------- */
 /* === Session Section === */
-.session-list-container {
-  background-color: #121212;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
-  border: 1px solid #2c2c2c;
-}
+
 
 .session-list-title {
   color: #E07A84;
@@ -264,8 +258,8 @@ HomePage.css
   padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
-  border: 1px solid #2c2c2c;
-  flex: 2;  /* Takes more space than the left */
+  border: 1px solid  #F4C4BC;;
+  flex: 4;  /* Takes more space than the left */
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
@@ -275,6 +269,8 @@ HomePage.css
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .session-card {
@@ -286,11 +282,11 @@ HomePage.css
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
 }
-
 .session-card:hover {
-  box-shadow: 0 6px 12px rgba(255, 255, 255, 0.08);
-  transform: scale(1.02);
+  box-shadow: 0 6px 12px rgba(244, 196, 188, 0.1); /* pinkish glow */
+  border-color: #F4C4BC;
 }
+
 
 .session-name {
   font-size: 1.4rem;
@@ -318,21 +314,20 @@ HomePage.css
 }
 
 .add-session-button:hover {
-  box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
+  box-shadow: 0 4px 12px rgba(51, 61, 119, 0.913);
   transform: translateY(-2px);
 }
 
 /* ---------------------------------------------------------------------------------------------- */
 .category-detail-page {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 6rem 1rem 2rem;
+  width: 100%;
+  padding: 6rem 2rem 2rem; /* slightly reduced padding */
   display: flex;
-  flex-direction: row;   /* ← horizontal layout */
+  flex-direction: row;
   gap: 2rem;
-  align-items: flex-start; /* align top */
+  align-items: flex-start;
+  box-sizing: border-box;
 }
-
 .category-actions .action-button {
   padding: 0.5rem 1rem;
   background-image: linear-gradient(135deg, #E07A84 0%, #7C4445 100%);
@@ -356,3 +351,5 @@ HomePage.css
     max-width: 100%;
   }
 }
+
+
