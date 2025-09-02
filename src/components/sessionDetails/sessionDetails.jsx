@@ -36,12 +36,13 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
     }, [categoryId, sessionId])
 
     const handleAddComment = async (formData) => {
-        const newComment = await gameService.createComment({ comment: formData.comment }, gameId);
+        const newComment = await SessionService.createComment({ comment: formData.comment }, sessionId);
         console.log("New comment added:", newComment);
-        setGame((prevGame) => ({
-            ...prevGame,
-            comment: [...prevGame.comment, newComment],
-        }));
+        setSession((prevSession) => ({
+  ...prevSession,
+  comments: [...(prevSession.comments || []), newComment],
+}));
+
     };
 
     const handleEditComment = (comment) => {
@@ -114,65 +115,65 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
     if (!session) return <h2>Loading...</h2>
 
     return (
-        <>
+      <>
         <main>
-            <h1>{session.name}</h1>
-            <p><strong>Description:</strong> {session.description}</p>
-            <p><strong>Duration:</strong> {session.duration_minutes} minutes</p>
-            <p><strong>Capacity:</strong> {session.capacity}</p>
-            <p><strong>Start Time:</strong> {new Date(session.start_time).toLocaleString()}</p>
-            <p><strong>End Time:</strong> {new Date(session.end_time).toLocaleString()}</p>
-            {user && user.is_admin && (
-                <div>
-                    <Link to={`/categories/${categoryId}/sessions/${sessionId}/edit`}>Edit</Link>
-                    <button onClick={() => handleDeleteSession(categoryId, sessionId)}>Delete</button>
-                </div>
-            )}
-        </main>
-
-        <div className="box">
-            <section>
-                <h2>Rating</h2>
-                {renderFaces()}
-            </section>
-        </div>
-
-         <div className="box">
-            <section>
-                <h2>Comments</h2>
-                {(!session.comments || session.comments.length === 0) && <p>No comments.</p>}
-                {session.comments && session.comments.map((comment) => (
-                    editingCommentId === comment._id ? (
-                        <CommentForm
-                            key={comment._id}
-                            initialText={editingText}
-                            handleAddComment={handleUpdateComment}
-                            submitLabel="Update"
-                            handleCancel={() => setEditingCommentId(null)}
-                        />
-                    ) : (
-                        <div key={comment._id}>
-                            <p>
-                                <b>{comment.author?.username || 'Unknown Author'}</b>: {comment.comment}
-                            </p>
-                            {user && comment.author?._id === user._id && (
-                                <>
-                                    <button onClick={() => handleEditComment(comment)}>Edit</button>
-                                    <button onClick={() => handleDeleteComment(comment._id)}>Delete</button>
-                                </>
-                            )}
-                        </div>
-                    )
+          <h1>{session.name}</h1>
+          <p>
+            <strong>Description:</strong> {session.description}
+          </p>
+          <p>
+            <strong>Duration:</strong> {session.duration_minutes} minutes
+          </p>
+          <p>
+            <strong>Capacity:</strong> {session.capacity}
+          </p>
+          <p>
+            <strong>Start Time:</strong>{" "}
+            {new Date(session.start_time).toLocaleString()}
+          </p>
+          <p>
+            <strong>End Time:</strong>{" "}
+            {new Date(session.end_time).toLocaleString()}
+          </p>
+          {user && user.is_admin && (
+            <div>
+              <Link to={`/categories/${categoryId}/sessions/${sessionId}/edit`}>
+                Edit
+              </Link>
+              <button
+                onClick={() => handleDeleteSession(categoryId, sessionId)}
+              >
+                Delete
+              </button>
+            </div>
+          )}
+          <section>
+            <h2>Reviews</h2>
+            {session.reviews?.length ? (
+              <ul>
+                {" "}
+                {session.reviews.map((review, idx) => (
+                  <li key={review.id || idx}>
+                    <p>
+                      <strong>Author: </strong>
+                      {review.user.username}
+                    </p>
+                    <strong>Rating:</strong> {review.rating} ★<br />
+                    <p>
+                      <strong>Review: </strong>
+                      {review.content}
+                    </p>
+                  </li>
                 ))}
-                {user && !editingCommentId && (
-                    <CommentForm handleAddComment={handleAddComment} submitLabel="Add Comment" />
-                )}
-            </section>
-        </div>
-
-        
-        </>
-    )
+              </ul>
+            ) : (
+              <p>No reviews yet.</p>
+            )}
+            {/* <ReviewForm onReviewSubmit={fetchItem} /> */}
+          </section>
+        </main>
+      </>
+    );
 }
 
 export default SessionDetails
