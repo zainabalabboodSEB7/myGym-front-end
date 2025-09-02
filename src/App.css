@@ -1,12 +1,13 @@
+
 body {
   background-color: #000  !important;
   font-family: 'Arial', sans-serif; 
   margin: 0; 
-  padding-top: 100px;
+  padding-top: 80px;
 }
 #navbar {
   position: absolute;
-  top: 2%; 
+  top: 0%; 
   left: 0; 
   right: 0; 
   display: flex; 
@@ -118,35 +119,30 @@ HomePage.css
 
 #startNow-P {
   float: left;
-  width: 45%;
+  width: 40%;
   text-align: left;
   background-color: #F4C4BC;
   padding: 20px; 
   border-radius: 10px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  margin: 30px; 
+  margin: 20px; 
 }
 
 #startNow-P h2 {
-  margin-bottom: 20px; 
+  margin-bottom: 10px; 
   color: #7C4445;
-  font-weight: bold;
 }
 
 #startNow-P p {
-  margin-bottom: 32px; 
-  font-weight: bold;
-  color: #fff;
-  font-size: 18px;
+  margin-bottom: 42px; 
 }
 
 #startNow-P button {
   background-color: #E07A84; 
   border: none;
   border-radius: 25px; 
-  color: #fff;
-  font-weight: bold;
-  padding: 0px 20px; 
+  color: white;
+  padding: 10px 20px; 
   font-size: 16px; 
   cursor: pointer;
 }
@@ -158,31 +154,26 @@ HomePage.css
 /* Contact Section */
 .contact-section {
   float: right;
-  width: 45%;
+  width: 40%;
   text-align: left;
   background-color: #F4C4BC;
   padding: 20px; 
   border-radius: 10px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  margin: 30px; 
-  margin-bottom: 1200px;
-  font-weight: bold;
+  margin: 20px; 
 }
 
 .contact-section h2 {
-  margin-bottom: 15px; 
+  margin-bottom: 10px; 
   color: #7C4445;
-  font-weight: bold;
 }
 
 .contact-section p {
   margin-bottom: 10px; 
-  font-size: 18px;
-  color: #fff;
 }
 
 .contact-section img {
-  height: 30px;
+  height: 25px;
 }
 
 #startNowBtn {
@@ -207,16 +198,11 @@ HomePage.css
 #startNowBtn:active {
   opacity: 0.5;
 }
-
-#space2{
-  padding-bottom: 320px;
-  background-color: #000;
-}
 /* ---------------- category------------------------------------------------------------- */
 .category-info {
   background-color: #F4C4BC;
   color: #7C4445;
-  padding: 4.2rem;
+  padding: 2rem;
   border-radius: 12px;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -224,12 +210,11 @@ HomePage.css
   flex-direction: column;
   gap: 1.2rem;
   border: none;
-  font-weight: bold;
 }
 
 .category-info h1,
 .session-list-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   line-height: 2.2rem;
 }
 
@@ -270,7 +255,7 @@ HomePage.css
 
 .session-list-container {
   background-color: #121212;
-  padding: 3.3rem;
+  padding: 2rem;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
   border: 1px solid  #F4C4BC;;
@@ -374,25 +359,21 @@ HomePage.css
   grid-template-columns: repeat(4, 1fr); /* 4 columns */
   gap: 20px; /* space between items */
   margin: 20px;
-    font-weight: bold;
 }
 
 #CategoryListItem a {
   text-decoration: none; /* removes the underline */
-  color: inherit;
-    font-weight: bold;        /* keeps the text color as defined in .category-item */
+  color: inherit;        /* keeps the text color as defined in .category-item */
 }
 
 #CategoryListItem a:hover {
   text-decoration: none; /* ensures no underline on hover */
-  font-weight: bold;
 }
 
 
 .category-item {
   background-color: #F4C4BC;   /* white background */
-  color: #7C4445;   
-  font-weight: bold;           /* black text */
+  color: #7C4445;              /* black text */
   padding: 20px;
   border-radius: 8px;       /* rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -404,13 +385,13 @@ HomePage.css
 .category-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
-  font-weight: bold;
 }
 
 #instructor{
  color: #4A2325;
   font-weight: normal;
 }
+
 
 @media (max-width: 768px) {
   .category-detail-page {
@@ -424,7 +405,7 @@ HomePage.css
 }
 /* ----------------------------------------------------------------------------------- */
 /* ===== Layout Container ===== */
-.session-details-wrapper {
+/* .session-details-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -443,7 +424,6 @@ HomePage.css
   padding: 4rem 1rem;
   gap: 2rem;
   min-height: 100vh;            
-  
 }
 
 
@@ -541,8 +521,4 @@ HomePage.css
 .no-reviews {
   color: #aaa;
   font-style: italic;
-}
-
-#newSessionForm{
-  background-color: #000;
 }
