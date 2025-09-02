@@ -1,11 +1,12 @@
 body {
-  background-color: black; 
+  background-color: #000  !important;
   font-family: 'Arial', sans-serif; 
   margin: 0; 
+  padding-top: 80px;
 }
 
 #navbar {
-  position: fixed;
+  position: absolute;
   top: 0%; 
   left: 0; 
   right: 0; 
@@ -94,7 +95,7 @@ HomePage.css
 
 .dots-container {
   margin-top: 10px;
-  margin-left: 140px;
+  margin-left: 740px;
 }
 
 .dot {
