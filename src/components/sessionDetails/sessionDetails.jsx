@@ -88,7 +88,8 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
             ) : (
               <p>No reviews yet.</p>
             )}
-            <ReviewForm onReviewSubmit={fetchSession}/>
+            {user && (<ReviewForm onReviewSubmit={fetchSession}/>)
+            }
           </section>
         </main>
       </>
