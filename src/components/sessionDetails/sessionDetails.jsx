@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as categoryService from '../../services/categoryService';
 import * as sessionService from '../../services/sessionService';
 import { useParams, useNavigate } from "react-router-dom";
-
+import './sessionDetails.css' 
 import ReviewForm from "../ReviewForm/ReviewForm";
 
 const SessionDetails = ({ user, handleDeleteSession }) => {
