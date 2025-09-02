@@ -25,7 +25,7 @@ const SessionList = ({ user }) => {
     <main className="session-list-container">
       <h1 className="session-list-title">Session List</h1>
 
-      {user && (
+      {user && user.is_admin && (
         <div className="session-list-actions">
           <button
             className="add-session-button"

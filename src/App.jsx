@@ -60,30 +60,36 @@ const App = () => {
     setUser(res)
   }
 
- const handleAddCategory = async (formData)=>{
-    try{
-      const newCategory = await categoryService.create(formData)
-    setCategories([...categories, newCategory])
-    navigate('/categories')
-    } catch (err){
-      console.error('Error adding category:', err)
+const handleAddCategory = async (formData) => {
+  try {
+    const payload = { ...formData, instructor_id: Number(formData.instructor_id) };
+    const newCategory = await categoryService.create(payload);
+    console.log("Created category:", newCategory);
 
-    }
+    setCategories(prevCategories => [...prevCategories, newCategory]);
+    navigate('/categories');
+  } catch (err) {
+    console.error('Error adding category:', err);
+  }
+};
 
-}
 
-  const handleUpdateCategory  = async (formData, categoryId)=>{
-   try{
-    const updatedCategory = await categoryService.update(formData, categoryId)
-    const categoryIndex = categories.findIndex(category => category._id === categoryId)
-    const newCategories = [...categories]
-    newCategories[categoryIndex] = updatedCategory
-    setCategories(newCategories)
-    navigate(`/categories/${categoryId}`)
-    } catch (err){
-      console.error('Error editing category:', err)
-    }
-}
+const handleUpdateCategory = async (formData, categoryId) => {
+  try {
+    const updatedCategory = await categoryService.update(formData, categoryId);
+
+    setCategories(prevCategories => 
+      prevCategories.map(cat => 
+        cat.id === updatedCategory.id ? updatedCategory : cat
+      )
+    );
+
+    navigate(`/categories/${categoryId}`);
+  } catch (err) {
+    console.error('Error editing category:', err);
+  }
+};
+
 
  const handleDeleteCategory = async (categoryId) => {
   try {
