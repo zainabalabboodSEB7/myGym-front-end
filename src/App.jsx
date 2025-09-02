@@ -110,7 +110,7 @@ const handleAddSession = async (categoryId, formData) => {
   try {
     const newSession = await sessionService.create(categoryId, formData);
     setSessions([...sessions, newSession]); 
-    navigate(`/categories/${categoryId}/sessions`);
+    navigate(`/categories/${categoryId}`);
   } catch (err) {
     console.error('Error adding session:', err);
   }

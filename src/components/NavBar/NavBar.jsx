@@ -20,6 +20,10 @@ const NavBar = (props) => {
           <li>Welcome, {props.user.username}</li>
           <li><Link to="/"> Home </Link></li>
           <li><Link to="/categories">Categories</Link></li>
+          {props.user.is_admin && (
+            <li><Link to="/categories/new">Add Category</Link></li>
+            
+        )}
           <li id="loginBtn"><Link to='/' onClick={props.handleSignOut}>Sign Out</Link></li>
         </ul>
         ) : (
