@@ -408,7 +408,8 @@ HomePage.css
 }
 
 #instructor{
- color:#fff;
+ color: #4A2325;
+  font-weight: normal;
 }
 
 @media (max-width: 768px) {
