@@ -51,8 +51,7 @@ const SignUp = (props) => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: '100vh',
-    padding: '3rem',
+    padding: '1rem',
   }}>
       <div className="signup-card">
         <h1>Create an Account</h1>
