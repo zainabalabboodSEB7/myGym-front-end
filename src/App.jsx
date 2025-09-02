@@ -26,7 +26,9 @@ const App = () => {
   const [user, setUser] = useState(initialState)
   const [categories, setCategories] = useState([])
   const [sessions, setSessions] = useState([])
-
+  useEffect(() => {
+  document.body.setAttribute('data-bs-theme', 'dark')
+}, [])
   useEffect(() => {
     const fetchAllCategories = async () => {
       const categoriesData = await categoryService.index()
