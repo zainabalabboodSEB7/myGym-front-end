@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import * as categoryService from '../../services/categoryService';
 import * as instructorService from '../../services/instructorService';
-import { Form, Button } from 'react-bootstrap';
+import { Container, Card, Form, Button } from 'react-bootstrap';
 
 const CategoryForm = ({ user, handleAddCategory, handleUpdateCategory }) => {
   const { categoryId } = useParams();
@@ -75,48 +75,57 @@ const CategoryForm = ({ user, handleAddCategory, handleUpdateCategory }) => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formName">
-        <Form.Label>Category Name:</Form.Label>
-        <Form.Control
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
+<Container className="d-flex justify-content-center align-items-center min-vh-100">
+  <Card text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a' }}>
+    <Card.Body>
+      <Card.Title className="mb-4 text-center">
+        {categoryId ? 'Edit Category' : 'New Category'}
+      </Card.Title>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group className="mb-3" controlId="formName">
+          <Form.Label>Category Name:</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formDescription">
-        <Form.Label>Description:</Form.Label>
-        <Form.Control
-          type="text"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formDescription">
+          <Form.Label>Description:</Form.Label>
+          <Form.Control
+            type="text"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formInstructor">
-        <Form.Label>Instructor:</Form.Label>
-        <Form.Select
-          name="instructor_id"
-          value={formData.instructor_id}
-          onChange={handleChange}
-        >
-          <option value="">Select an instructor</option>
-          {instructors.map(inst => (
-            <option key={inst.id} value={inst.id}>{inst.name}</option>
-          ))}
-        </Form.Select>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formInstructor">
+          <Form.Label>Instructor:</Form.Label>
+          <Form.Select
+            name="instructor_id"
+            value={formData.instructor_id}
+            onChange={handleChange}
+          >
+            <option value="">Select an instructor</option>
+            {instructors.map(inst => (
+              <option key={inst.id} value={inst.id}>{inst.name}</option>
+            ))}
+          </Form.Select>
+        </Form.Group>
 
+        <Button style={{backgroundColor:'#e07a84', border:'#e07a84'}} type="submit" className="w-100">
+          {categoryId ? 'Update Category' : 'Create Category'}
+        </Button>
+      </Form>
+    </Card.Body>
+  </Card>
+</Container>
 
-      <Button variant="primary" type="submit">
-        {categoryId ? 'Update Category' : 'Create Category'}
-      </Button>
-    </Form >
   );
 };
 

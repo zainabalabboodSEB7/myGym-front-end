@@ -321,6 +321,13 @@ HomePage.css
   display: inline-block;
 }
 
+.session-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* full screen height */
+}
+
 #CategoryListTitle h1{
   color:#fff;
   padding-left: 700px;
@@ -359,3 +366,4 @@ HomePage.css
   transform: translateY(-3px);
   box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
 }
+
