@@ -2,18 +2,26 @@ import { Link, useParams } from 'react-router-dom';
 
 const CategoryList = (props) => {
   return (
-    <main>
+    <>
+      <div id="CategoryListTitle">
       <h1>Category List</h1>
-      {props.categories.map((category) => (
-        <Link to={`/categories/${category.id}`} key={category.id}>
-        <div key={category.id}>
-          <h3>{category.name}</h3>
-          {category.description && <p>{category.description} </p>}
-        </div>
+      </div>
+    <main>
 
-        </Link>
-      ))}
+<div id="CategoryListItem">
+  {props.categories.map((category) => (
+    <Link to={`/categories/${category.id}`} key={category.id}>
+      <div className="category-item">
+        <h3>{category.name}</h3>
+        {category.description && <p>{category.description}</p>}
+      </div>
+    </Link>
+  ))}
+</div>
+
+
     </main>
+    </>
   )
 }
 
