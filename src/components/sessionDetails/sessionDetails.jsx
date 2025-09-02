@@ -71,7 +71,6 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
         </section>
 
         {/* Right side (split into top/bottom) */}
-        <aside className="review-side-panel">
           {/* Top 25% - Review Form */}
           <div className="review-form-wrapper">
             {user && <ReviewForm onReviewSubmit={fetchSession} />}
@@ -102,7 +101,6 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
               <p>No reviews yet.</p>
             )}
           </div>
-        </aside>
       </main>
     </>
   );
