@@ -366,3 +366,12 @@ HomePage.css
   transform: translateY(-3px);
   box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
 }
+=========
+.session-form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* full screen height */
+}
+
+>>>>>>>>> Temporary merge branch 2
