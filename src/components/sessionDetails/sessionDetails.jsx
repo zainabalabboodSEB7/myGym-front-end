@@ -36,12 +36,13 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
     }, [categoryId, sessionId])
 
     const handleAddComment = async (formData) => {
-        const newComment = await gameService.createComment({ comment: formData.comment }, gameId);
+        const newComment = await SessionService.createComment({ comment: formData.comment }, sessionId);
         console.log("New comment added:", newComment);
-        setGame((prevGame) => ({
-            ...prevGame,
-            comment: [...prevGame.comment, newComment],
-        }));
+        setSession((prevSession) => ({
+  ...prevSession,
+  comments: [...(prevSession.comments || []), newComment],
+}));
+
     };
 
     const handleEditComment = (comment) => {
