@@ -51,7 +51,8 @@ const ReviewForm = ({ onReviewSubmit }) => {
 					))}
 				</select>
 			</div>
-			<button type="submit" disabled={submitting}>{submitting ? 'Submitting...' : 'Submit Review'}</button>
+			<button type="submit"   className="add-session-button"
+ disabled={submitting}>{submitting ? 'Submitting...' : 'Submit Review'}</button>
 			{error && <p style={{ color: 'red' }}>{error}</p>}
 		</form>
 

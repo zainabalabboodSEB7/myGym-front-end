@@ -399,7 +399,7 @@ HomePage.css
 }
 /* ----------------------------------------------------------------------------------- */
 /* ===== Layout Container ===== */
-.session-details-wrapper {
+/* .session-details-wrapper {
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -407,7 +407,20 @@ HomePage.css
   margin: 4rem auto;
   padding: 0 1rem;
   gap: 2rem;
+} */
+
+.session-details-wrapper {
+  display: flex;
+  justify-content: center;     
+  align-items: center;         
+  max-width: 1200px;
+  margin: 0 auto;              
+  padding: 4rem 1rem;
+  gap: 2rem;
+  min-height: 100vh;            
+  transform: translateX(35%);
 }
+
 
 /* ===== Left Column (50%) ===== */
 .session-info {
