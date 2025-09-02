@@ -87,7 +87,7 @@ const SessionForm = ({ user, categories, handleAddSession, handleUpdateSession }
 
     return (
         <Container className="d-flex justify-content-center align-items-center min-vh-100">
-            <Card bg="dark" text="light" style={{ width: '28rem' }}>
+            <Card  text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a', marginLeft:'500px'  }}>
                 <Card.Body>
                     <Card.Title className="mb-4 text-center">
                         {sessionId ? 'Edit Session' : 'New Session'}
@@ -172,7 +172,7 @@ const SessionForm = ({ user, categories, handleAddSession, handleUpdateSession }
                             />
                         </Form.Group>
 
-                        <Button variant="primary" type="submit" className="w-100">
+                        <Button style={{backgroundColor:'#e07a84', border:'#e07a84'}} type="submit" className="w-100">
                             {sessionId ? 'Update Session' : 'Create Session'}
                         </Button>
                     </Form>
