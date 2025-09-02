@@ -75,8 +75,13 @@ const CategoryForm = ({ user, handleAddCategory, handleUpdateCategory }) => {
   if (loading) return <p>Loading...</p>;
 
   return (
-<Container className="d-flex justify-content-center align-items-center">
-  <Card text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a', marginTop:'170px' }}>
+<Container 
+  className="d-flex justify-content-center align-items-center vh-100"
+>
+  <Card 
+    text="light" 
+    style={{ width: '28rem', backgroundColor: '#1a1a1a', marginTop: '-120px' }}
+  >
     <Card.Body>
       <Card.Title className="mb-4 text-center">
         {categoryId ? 'Edit Category' : 'New Category'}
@@ -118,13 +123,18 @@ const CategoryForm = ({ user, handleAddCategory, handleUpdateCategory }) => {
           </Form.Select>
         </Form.Group>
 
-        <Button style={{backgroundColor:'#e07a84', border:'#e07a84'}} type="submit" className="w-100">
+        <Button 
+          style={{ backgroundColor:'#e07a84', border:'#e07a84' }} 
+          type="submit" 
+          className="w-100"
+        >
           {categoryId ? 'Update Category' : 'Create Category'}
         </Button>
       </Form>
     </Card.Body>
   </Card>
 </Container>
+
 
   );
 };
