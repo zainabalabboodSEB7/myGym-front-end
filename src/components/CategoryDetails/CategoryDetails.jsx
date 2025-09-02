@@ -26,8 +26,8 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
 
         {user && user.is_admin && (
           <div className="category-actions">
-            <Link to={`/categories/${categoryId}/edit`}>Edit</Link>
-            <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
+          <Link to={`/categories/${categoryId}/edit`} className="action-button">Edit</Link>
+          <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
              </div>
         )}   
            </section>
