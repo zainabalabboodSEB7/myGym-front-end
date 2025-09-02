@@ -60,10 +60,10 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
           </p>
           {user && user.is_admin && (
             <div style={{ marginTop: '1rem' }}>
-              <button onClick={handleEdit} style={{ marginRight: '0.5rem' }}>
+              <button onClick={handleEdit} className="add-session-button"style={{ marginRight: '0.5rem' }}>
                 Edit
               </button>
-              <button onClick={handleDelete} style={{ color: 'red' }} disabled={deleting}>
+              <button onClick={handleDelete} style={{ color: 'white' }} disabled={deleting}>
                 {deleting ? 'Deleting...' : 'Delete'}
               </button>
             </div>
