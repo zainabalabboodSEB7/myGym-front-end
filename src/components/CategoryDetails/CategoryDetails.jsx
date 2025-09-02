@@ -31,10 +31,6 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
  </div>
         )}   
          <SessionList user={user} /> 
-
-
-         
-   
         </>
     )
   }
