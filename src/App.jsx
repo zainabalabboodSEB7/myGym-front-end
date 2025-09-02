@@ -10,7 +10,7 @@ import { useState, useEffect } from 'react'
 import SessionList from './components/SessionList/SessionList.jsx'
 import SessionDetails from './components/sessionDetails/sessionDetails.jsx'
 import SessionForm from './components/SessionsForm/SessionForm.jsx'
-
+import HomePage from './components/HomePage/HomePage.jsx'
 
 import * as sessionService from './services/sessionService.js'
 
@@ -133,7 +133,7 @@ const handleUpdateSession = async (categoryId, sessionId, payload) => {
     <>
       <NavBar user={user} handleSignOut={handleSignOut} />
       <Routes>
-          <Route path='/' element={<h1>Hello, world! </h1>} />
+          <Route path='/' element={<HomePage HomePage={HomePage}/>} />
           <Route path='/categories' element={<CategoryList categories={categories}/>}/>
 
           <Route path='/categories/new' element={<CategoryForm handleAddCategory={handleAddCategory} user={user}  />} />
