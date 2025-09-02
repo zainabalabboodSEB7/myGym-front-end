@@ -86,8 +86,8 @@ const SessionForm = ({ user, categories, handleAddSession, handleUpdateSession }
     if (loading) return <p>Loading...</p>;
 
     return (
-        <Container className="d-flex justify-content-center align-items-center min-vh-100">
-            <Card  text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a', marginLeft:'500px'  }}>
+        <Container className="d-flex justify-content-center align-items-center">
+            <Card text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a'}}>
                 <Card.Body>
                     <Card.Title className="mb-4 text-center">
                         {sessionId ? 'Edit Session' : 'New Session'}

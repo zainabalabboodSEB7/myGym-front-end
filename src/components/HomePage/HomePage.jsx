@@ -62,6 +62,7 @@ const HomePage = (props) => {
         <p><img src={phoneImg} alt="Phone" /> +973 33333333</p>
         <p><img src={mapImg} alt="Location" /> Manama, Bahrain</p>
       </div>
+<div id="space2"></div>
     </>
   );
 };

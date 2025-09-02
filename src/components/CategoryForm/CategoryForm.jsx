@@ -75,8 +75,8 @@ const CategoryForm = ({ user, handleAddCategory, handleUpdateCategory }) => {
   if (loading) return <p>Loading...</p>;
 
   return (
-<Container className="d-flex justify-content-center align-items-center min-vh-100">
-  <Card text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a' }}>
+<Container className="d-flex justify-content-center align-items-center">
+  <Card text="light" style={{ width: '28rem', backgroundColor: '#1a1a1a', marginTop:'170px' }}>
     <Card.Body>
       <Card.Title className="mb-4 text-center">
         {categoryId ? 'Edit Category' : 'New Category'}
