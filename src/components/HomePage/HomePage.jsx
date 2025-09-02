@@ -5,10 +5,12 @@ import gym3 from '../../assets/images/gym3.png';
 import emailImg from '../../assets/images/email-img.png';
 import phoneImg from '../../assets/images/phone-img.png';
 import mapImg from '../../assets/images/map-img.png';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = (props) => {
   const images = [gym1, gym2, gym3];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
 
   const handleMouseEnter = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -16,6 +18,10 @@ const HomePage = (props) => {
 
   const handleDotClick = (index) => {
     setCurrentImageIndex(index);
+  };
+
+  const handleStartNow = () => {
+    navigate('/categories'); 
   };
 
   return (
@@ -45,7 +51,9 @@ const HomePage = (props) => {
       <div id="startNow-P">
         <h2>My Gym</h2>
         <p>My Gym is a welcoming fitness center that focuses on personalized training and community support to help everyone achieve their health goals.</p>
-        <button id="startNowBtn">START NOW</button>
+        <button id="startNowBtn" onClick={handleStartNow}>
+          START NOW
+        </button>
       </div>
 
       <div className="contact-section">
