@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import * as categoryService from '../../services/categoryService.js'
 import SessionList from '../SessionList/SessionList.jsx';
+import '../../App.css'
+
 const CategoryDetails = ({ user, handleDeleteCategory }) => {
     const { categoryId } = useParams()
     
@@ -18,21 +20,23 @@ const CategoryDetails = ({ user, handleDeleteCategory }) => {
     if (!category) return <h2>Loading...</h2>;
  
     return (
-        <>
-        <strong>Category:</strong> {category.name}<br />
-        <strong>Description:</strong> {category.description}<br />
-        <strong>Instructor:</strong> {category.instructor?.name || "No instructor"}
+       <main className="category-detail-page">
+        <section className="category-info">
+        <h1>{category.name}</h1>
+        <p>{category.description}</p>
+        <p>{category.instructor?.name || "No instructor"}</p>
 
 
         {user && user.is_admin && (
-          <div>
-            <Link to={`/categories/${categoryId}/edit`}>Edit</Link>
-            <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
- </div>
+          <div className="category-actions">
+          <Link to={`/categories/${categoryId}/edit`} className="action-button">Edit</Link>
+          <button onClick={() => handleDeleteCategory(categoryId)}>Delete</button>
+             </div>
         )}   
+           </section>
          <SessionList user={user} /> 
-        </>
-    )
-  }
+        </main>
+    );
+  };
 
 export default CategoryDetails;

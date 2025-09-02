@@ -167,10 +167,27 @@ const deleteSession = async (categoryId, sessionId) => {
   }
 }
 
+
+
+const createReview = async (categoryId, sessionId, formData) => {
+    const token = localStorage.getItem('token')
+    const res = await fetch(`${BASE_URL}/${categoryId}/sessions/${sessionId}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(formData)
+    })
+    const data = await res.json()
+    return data
+}
+
 export {
   index,
   show,
   create,
   update,
   deleteSession,
+  createReview
 }

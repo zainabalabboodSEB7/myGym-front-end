@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './SignIn.css'
 
 const SignIn = (props) => {
   const navigate = useNavigate()
@@ -28,18 +29,22 @@ const SignIn = (props) => {
   }
 
   return (
-    <main>
-      <h1>Sign In Form</h1>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input type="text" name='username' onChange={handleChange} />
-        <br />
-        <label>Password:</label>
-        <input type="password" name='password' onChange={handleChange} />
-        <br />
-        <button type="submit">Sign In</button>
-      </form>
-    </main>
+    <main className="signin-container">
+  <div className="signin-card">
+    <h1>Sign In</h1>
+    {props.error && <p className="error-msg">{props.error}</p>}
+    <form onSubmit={handleSubmit} className="signin-form">
+      <label>Username</label>
+      <input type="text" name="username" onChange={handleChange} value={formData.username} />
+
+      <label>Password</label>
+      <input type="password" name="password" onChange={handleChange} value={formData.password} />
+
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</main>
+
   )
 }
 
