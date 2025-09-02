@@ -15,7 +15,6 @@ body {
   padding: 1rem; 
   color: white; 
   font-weight: bold; 
-  background-color: rgba(0, 0, 0, 0.8); 
   z-index: 1000; 
   font-size: 20px;
 }
@@ -196,4 +195,3 @@ body {
 #startNowBtn:active {
   opacity: 0.5;
 }
-
