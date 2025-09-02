@@ -167,6 +167,26 @@ const deleteSession = async (categoryId, sessionId) => {
   }
 }
 
+const createComment = async (commentData, categoryId, sessionId) => {
+  try {
+    const token = localStorage.getItem('token')
+    const res = await fetch(`${BASE_URL}/${categoryId}/sessions/${sessionId}/reviews`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(commentData),
+    })
+    if (!res.ok) throw new Error('Failed to create comment')
+    return await res.json()
+  } catch (err) {
+    console.error('Failed to create comment:', err)
+  }
+}
+
+
+
 const createReview = async (categoryId, sessionId, formData) => {
     const token = localStorage.getItem('token')
     const res = await fetch(`${BASE_URL}/${categoryId}/sessions/${sessionId}/reviews`, {
@@ -187,5 +207,7 @@ export {
   create,
   update,
   deleteSession,
+
   createReview
+
 }

@@ -22,6 +22,7 @@ const SessionDetails = ({ user, handleDeleteSession }) => {
     }, [categoryId, sessionId])
 
 
+
     const handleEdit = () => {
         navigate(`/categories/${categoryId}/sessions/${sessionId}/edit`)
     }
