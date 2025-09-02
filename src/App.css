@@ -1,13 +1,12 @@
-
 body {
   background-color: #000  !important;
   font-family: 'Arial', sans-serif; 
   margin: 0; 
-  padding-top: 80px;
+  padding-top: 100px;
 }
 #navbar {
   position: absolute;
-  top: 0%; 
+  top: 2%; 
   left: 0; 
   right: 0; 
   display: flex; 
@@ -119,30 +118,35 @@ HomePage.css
 
 #startNow-P {
   float: left;
-  width: 40%;
+  width: 45%;
   text-align: left;
   background-color: #F4C4BC;
   padding: 20px; 
   border-radius: 10px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  margin: 20px; 
+  margin: 30px; 
 }
 
 #startNow-P h2 {
-  margin-bottom: 10px; 
+  margin-bottom: 20px; 
   color: #7C4445;
+  font-weight: bold;
 }
 
 #startNow-P p {
-  margin-bottom: 42px; 
+  margin-bottom: 32px; 
+  font-weight: bold;
+  color: #fff;
+  font-size: 18px;
 }
 
 #startNow-P button {
   background-color: #E07A84; 
   border: none;
   border-radius: 25px; 
-  color: white;
-  padding: 10px 20px; 
+  color: #fff;
+  font-weight: bold;
+  padding: 0px 20px; 
   font-size: 16px; 
   cursor: pointer;
 }
@@ -154,26 +158,31 @@ HomePage.css
 /* Contact Section */
 .contact-section {
   float: right;
-  width: 40%;
+  width: 45%;
   text-align: left;
   background-color: #F4C4BC;
   padding: 20px; 
   border-radius: 10px; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-  margin: 20px; 
+  margin: 30px; 
+  margin-bottom: 1200px;
+  font-weight: bold;
 }
 
 .contact-section h2 {
-  margin-bottom: 10px; 
+  margin-bottom: 15px; 
   color: #7C4445;
+  font-weight: bold;
 }
 
 .contact-section p {
   margin-bottom: 10px; 
+  font-size: 18px;
+  color: #fff;
 }
 
 .contact-section img {
-  height: 25px;
+  height: 30px;
 }
 
 #startNowBtn {
@@ -197,6 +206,11 @@ HomePage.css
 
 #startNowBtn:active {
   opacity: 0.5;
+}
+
+#space2{
+  padding-bottom: 320px;
+  background-color: #000;
 }
 /* ---------------- category------------------------------------------------------------- */
 .category-info {
@@ -359,21 +373,25 @@ HomePage.css
   grid-template-columns: repeat(4, 1fr); /* 4 columns */
   gap: 20px; /* space between items */
   margin: 20px;
+    font-weight: bold;
 }
 
 #CategoryListItem a {
   text-decoration: none; /* removes the underline */
-  color: inherit;        /* keeps the text color as defined in .category-item */
+  color: inherit;
+    font-weight: bold;        /* keeps the text color as defined in .category-item */
 }
 
 #CategoryListItem a:hover {
   text-decoration: none; /* ensures no underline on hover */
+  font-weight: bold;
 }
 
 
 .category-item {
   background-color: #F4C4BC;   /* white background */
-  color: #7C4445;              /* black text */
+  color: #7C4445;   
+  font-weight: bold;           /* black text */
   padding: 20px;
   border-radius: 8px;       /* rounded corners */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -385,6 +403,11 @@ HomePage.css
 .category-item:hover {
   transform: translateY(-3px);
   box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+  font-weight: bold;
+}
+
+#instructor{
+ color:#fff;
 }
 
 @media (max-width: 768px) {
@@ -503,4 +526,8 @@ HomePage.css
 .no-reviews {
   color: #aaa;
   font-style: italic;
+}
+
+#newSessionForm{
+  background-color: #000;
 }

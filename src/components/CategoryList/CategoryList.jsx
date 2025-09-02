@@ -10,7 +10,7 @@ const CategoryList = (props) => {
               <div className="category-item">
                 <h3>{category.name}</h3>
                 {category.description && <p>{category.description}</p>}
-                {category.instructor?.name && <p>{category.instructor.name}</p>}
+                {category.instructor?.name && <p id="instructor">Instructor: {category.instructor.name}</p>}
               </div>
             </Link>
           ) : null
