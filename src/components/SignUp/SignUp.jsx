@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './SignUp.css' 
 
 const SignUp = (props) => {
   const navigate = useNavigate()
@@ -46,25 +47,54 @@ const SignUp = (props) => {
   }
 
   return (
-    <main>
-      <h1>Sign up Form</h1>
-      {/* add error message display to form */}
-      {error}
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input type="text" name='username' onChange={handleChange} />
-        <br />
-        <label>Email:</label> 
-        <input type="email" name="email" onChange={handleChange} />
-        <br />
-        <label>Password:</label>
-        <input type="password" name='password' onChange={handleChange} />
-        <br />
-        <label>Confirm Password:</label>
-        <input type="password" name="passwordConf" onChange={handleChange} />
-        <br />
-        <button type="submit" disabled={formIsInvalid}>Sign up</button>
-      </form>
+    <main className="signup-container" style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    minHeight: '100vh',
+    padding: '3rem',
+  }}>
+      <div className="signup-card">
+        <h1>Create an Account</h1>
+        {error && <p className="error-msg">{error}</p>}
+        <form onSubmit={handleSubmit} className="signup-form">
+          <label>Username</label>
+          <input
+            type="text"
+            name="username"
+            onChange={handleChange}
+            value={formData.username}
+          />
+
+          <label>Email</label>
+          <input
+            type="email"
+            name="email"
+            onChange={handleChange}
+            value={formData.email}
+          />
+
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+          />
+
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            name="passwordConf"
+            onChange={handleChange}
+            value={formData.passwordConf}
+          />
+
+          <button type="submit" disabled={formIsInvalid}>
+            Sign up
+          </button>
+        </form>
+      </div>
     </main>
   )
 }
