@@ -216,7 +216,7 @@ HomePage.css
 .category-info {
   background-color: #F4C4BC;
   color: #7C4445;
-  padding: 2rem;
+  padding: 4.2rem;
   border-radius: 12px;
   margin-bottom: 2rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -224,11 +224,12 @@ HomePage.css
   flex-direction: column;
   gap: 1.2rem;
   border: none;
+  font-weight: bold;
 }
 
 .category-info h1,
 .session-list-title {
-  font-size: 1.8rem;
+  font-size: 2rem;
   line-height: 2.2rem;
 }
 
@@ -269,7 +270,7 @@ HomePage.css
 
 .session-list-container {
   background-color: #121212;
-  padding: 2rem;
+  padding: 3.3rem;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
   border: 1px solid  #F4C4BC;;
